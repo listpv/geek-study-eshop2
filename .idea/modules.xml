@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/geek-study-eshop/geek-study-eshop.iml" filepath="$PROJECT_DIR$/geek-study-eshop/geek-study-eshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/geek-study-eshop 2.iml" filepath="$PROJECT_DIR$/.idea/geek-study-eshop 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geek-study-eshop/shop-admin-ui/shop-admin-ui.iml" filepath="$PROJECT_DIR$/geek-study-eshop/shop-admin-ui/shop-admin-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geek-study-eshop/shop-database/shop-database.iml" filepath="$PROJECT_DIR$/geek-study-eshop/shop-database/shop-database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geek-study-eshop/shop-picture-service/shop-picture-service.iml" filepath="$PROJECT_DIR$/geek-study-eshop/shop-picture-service/shop-picture-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/geek-study-eshop/shop-ui/shop-ui.iml" filepath="$PROJECT_DIR$/geek-study-eshop/shop-ui/shop-ui.iml" />
+    </modules>
+  </component>
+</project>
