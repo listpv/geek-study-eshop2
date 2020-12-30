@@ -14,7 +14,10 @@ import ru.geekbrains.controller.repr.ProductRepr;
 import ru.geekbrains.error.NotFoundException;
 import ru.geekbrains.persist.repo.BrandRepository;
 import ru.geekbrains.persist.repo.CategoryRepository;
+import ru.geekbrains.service.PictureService;
 import ru.geekbrains.service.ProductService;
+
+import java.util.Optional;
 
 
 @Controller
@@ -27,6 +30,7 @@ public class ProductsController {
     private final CategoryRepository categoryRepository;
 
     private final BrandRepository brandRepository;
+
 
     @Autowired
     public ProductsController(ProductService productService, CategoryRepository categoryRepository,
@@ -50,6 +54,7 @@ public class ProductsController {
         model.addAttribute("product", productService.findById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("brands", brandRepository.findAll());
+
         return "product_form";
     }
 

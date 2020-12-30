@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.geekbrains.service.PictureService;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.util.Optional;
 
 @Controller
@@ -31,11 +31,34 @@ public class PictureController {
         logger.info("Downloading picture with id: {}", pictureId);
 
         Optional<String> opt = pictureService.getPictureContentTypeById(pictureId);
+//        if (opt.isPresent()) {
+//            resp.setContentType(opt.get());
+//            resp.getOutputStream().write(pictureService.getPictureDataById(pictureId).get());
+//        } else {
+//            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//        }
+
+
+
         if (opt.isPresent()) {
+
             resp.setContentType(opt.get());
-            resp.getOutputStream().write(pictureService.getPictureDataById(pictureId).get());
+            byte[] buf = new byte[1024];
+            int n;
+
+            try(InputStream inFile = new FileInputStream(pictureService.getPictureDataFilesById(pictureId).get()))
+            {
+                while ((n = inFile.read(buf)) != -1)
+                {
+                    resp.getOutputStream().write(buf, 0, n);
+                }
+            }
+
         } else {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
+
+
     }
+
 }

@@ -9,11 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.controller.repr.ProductRepr;
 import ru.geekbrains.error.NotFoundException;
 import ru.geekbrains.persist.model.Picture;
+import ru.geekbrains.persist.model.PictureData;
 import ru.geekbrains.persist.model.Product;
 import ru.geekbrains.persist.repo.ProductRepository;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,10 +64,46 @@ public class ProductServiceImpl implements ProductService, Serializable {
         product.setBrand(productRepr.getBrand());
         product.setPrice(productRepr.getPrice());
 
+//        if (productRepr.getNewPictures() != null) {
+//            for (MultipartFile newPicture : productRepr.getNewPictures()) {
+//                logger.info("Product {} file {} size {} contentType {}", productRepr.getId(),
+//                        newPicture.getOriginalFilename(), newPicture.getSize(), newPicture.getContentType());
+//
+//                if (product.getPictures() == null) {
+//                    product.setPictures(new ArrayList<>());
+//                }
+//
+//                product.getPictures().add(new Picture(
+//                        newPicture.getOriginalFilename(),
+//                        newPicture.getContentType(),
+//                        pictureService.createPictureData(newPicture.getBytes()),
+//                        product
+//                ));
+//            }
+//        }
+
         if (productRepr.getNewPictures() != null) {
             for (MultipartFile newPicture : productRepr.getNewPictures()) {
                 logger.info("Product {} file {} size {} contentType {}", productRepr.getId(),
                         newPicture.getOriginalFilename(), newPicture.getSize(), newPicture.getContentType());
+
+
+                String filename = String.valueOf(java.util.UUID.randomUUID());
+
+                File newfile = new File("ProductImage/" + product.getName());
+                newfile.mkdir();
+
+                try (OutputStream outFile = new BufferedOutputStream(new FileOutputStream( newfile + "/" + filename)))
+
+                {
+                    for(int i = 0; i < newPicture.getSize(); i++)
+                    {
+                        outFile.write(newPicture.getInputStream().read());
+
+                    }
+                }
+
+
 
                 if (product.getPictures() == null) {
                     product.setPictures(new ArrayList<>());
@@ -76,7 +112,7 @@ public class ProductServiceImpl implements ProductService, Serializable {
                 product.getPictures().add(new Picture(
                         newPicture.getOriginalFilename(),
                         newPicture.getContentType(),
-                        pictureService.createPictureData(newPicture.getBytes()),
+                        pictureService.createPictureData(newfile + "/" + filename),
                         product
                 ));
             }

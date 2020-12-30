@@ -18,7 +18,14 @@ public class PictureData {
     @Column(name = "data", length = 33554430) // для правильной hibernate-валидации в MySQL
     private byte[] data;
 
+    @Column(name = "file")
+    private String file;
+
     public PictureData() {
+    }
+
+    public PictureData(String file) {
+        this.file = file;
     }
 
     public PictureData(byte[] data) {
@@ -39,5 +46,13 @@ public class PictureData {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }
