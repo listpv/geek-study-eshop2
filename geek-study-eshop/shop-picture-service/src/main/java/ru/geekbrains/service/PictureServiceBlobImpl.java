@@ -34,4 +34,15 @@ public class PictureServiceBlobImpl implements PictureService {
     public PictureData createPictureData(byte[] picture) {
         return new PictureData(picture);
     }
+
+    @Override
+    public PictureData createPictureData(String file) {
+        return new PictureData(file);
+    }
+
+    @Override
+    public Optional<String> getPictureDataFilesById(long id) {
+        return repository.findById(id)
+                .map(pic -> pic.getPictureData().getFile());
+    }
 }

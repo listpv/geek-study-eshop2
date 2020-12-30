@@ -11,4 +11,9 @@ public interface PictureService {
     Optional<byte[]> getPictureDataById(long id);
 
     PictureData createPictureData(byte[] picture);
+
+    PictureData createPictureData(String file);
+
+    Optional<String> getPictureDataFilesById(long id);
+
 }
